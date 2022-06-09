@@ -2,6 +2,41 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Pedro Henrique Pires</Authors>
+    <Company>Pedro Henrique Pires - Escola de Software</Company>
+    <Description>Extensions package for dot net core. 
+
+On this package you'll receive extensions for int, long, string and enum.
+
+Enum:
+- GetDefaultValue and DescriptionValue
+- IsStringOnEnumDescription and IsStringOnEnumDefaultValue
+
+Int, long and string:
+- In (check if the item is on the string collection)
+
+Thanks a lot
+
+Pedro Henrique Pires - Escola de Software</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/PePires58/Extensions_Package_NetCore_Nuget/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PePires58/Extensions_Package_NetCore_Nuget/</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Extensions; DotNet Core</PackageTags>
+    <PackageIcon>logo.jpg</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\images\logo.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
