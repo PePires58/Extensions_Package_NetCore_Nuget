@@ -11,38 +11,57 @@ namespace Extensions.Package.NetCore
         {
             FieldInfo fieldInfo = enumObject.GetType().GetField(enumObject.ToString());
 
-            return fieldInfo == null ? null :
-                (
-                    (DefaultValueAttribute)fieldInfo
-                        .GetCustomAttribute(typeof(DefaultValueAttribute))
-                ).Value.ToString();
+            if (fieldInfo == null)
+                return null;
+            else
+            {
+                Attribute customAttribute = fieldInfo
+                        .GetCustomAttribute(typeof(DefaultValueAttribute));
+
+                return customAttribute == null ? null :
+                    ((DefaultValueAttribute)customAttribute).Value.ToString();
+            }
         }
-        public static string GetDescription(this Enum enumObject) {
+        public static string GetDescription(this Enum enumObject)
+        {
             FieldInfo fieldInfo = enumObject.GetType().GetField(enumObject.ToString());
-            return fieldInfo == null ? null :
-                (
-                    (DescriptionAttribute)fieldInfo
-                        .GetCustomAttribute(typeof(DescriptionAttribute))
-                ).Description.ToString();
+
+            if (fieldInfo == null)
+                return null;
+            else
+            {
+                Attribute customAttribute = fieldInfo
+                        .GetCustomAttribute(typeof(DescriptionAttribute));
+
+                return customAttribute == null ? null :
+                    ((DescriptionAttribute)customAttribute).Description.ToString();
+            }
         }
 
         public static bool IsStringOnEnumDefaultValue<T>(this string inputString)
-            where T: Enum
-        {
-            return Enum.GetValues(typeof(T))
+            where T : Enum
+            => IsStringOnEnumDefaultValue<T>(inputString, StringComparison.InvariantCultureIgnoreCase);
+
+        public static bool IsStringOnEnumDefaultValue<T>(this string inputString,
+            StringComparison stringComparison)
+            where T : Enum
+            => Enum.GetValues(typeof(T))
                 .Cast<T>()
-                .Any(enumObject => enumObject.GetDefaultValue()
-                    .Equals(inputString));
-        }
+                .Any(enumObject => inputString
+                    .Equals(enumObject.GetDefaultValue(), stringComparison));
+        
 
         public static bool IsStringOnEnumDescription<T>(this string inputString)
             where T : Enum
-        {
-            return Enum.GetValues(typeof(T))
-                .Cast<T>()
-                .Any(enumObject => enumObject.GetDescription()
-                    .Equals(inputString));
-        }
+            => IsStringOnEnumDescription<T>(inputString, StringComparison.InvariantCultureIgnoreCase);
 
+
+        public static bool IsStringOnEnumDescription<T>(this string inputString,
+            StringComparison stringComparison)
+            where T : Enum
+            => Enum.GetValues(typeof(T))
+                    .Cast<T>()
+                    .Any(enumObject => inputString
+                        .Equals(enumObject.GetDescription(), stringComparison));
     }
 }
