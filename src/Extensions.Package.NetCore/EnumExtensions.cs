@@ -11,31 +11,23 @@ namespace Extensions.Package.NetCore
         {
             FieldInfo fieldInfo = enumObject.GetType().GetField(enumObject.ToString());
 
-            if (fieldInfo == null)
-                return null;
-            else
-            {
-                Attribute customAttribute = fieldInfo
-                        .GetCustomAttribute(typeof(DefaultValueAttribute));
+            Attribute customAttribute = fieldInfo
+                    .GetCustomAttribute(typeof(DefaultValueAttribute));
 
-                return customAttribute == null ? null :
-                    ((DefaultValueAttribute)customAttribute).Value.ToString();
-            }
+            return customAttribute == null ? null :
+                ((DefaultValueAttribute)customAttribute).Value.ToString();
+
         }
         public static string GetDescription(this Enum enumObject)
         {
             FieldInfo fieldInfo = enumObject.GetType().GetField(enumObject.ToString());
 
-            if (fieldInfo == null)
-                return null;
-            else
-            {
-                Attribute customAttribute = fieldInfo
-                        .GetCustomAttribute(typeof(DescriptionAttribute));
 
-                return customAttribute == null ? null :
-                    ((DescriptionAttribute)customAttribute).Description.ToString();
-            }
+            Attribute customAttribute = fieldInfo
+                    .GetCustomAttribute(typeof(DescriptionAttribute));
+
+            return customAttribute == null ? null :
+                ((DescriptionAttribute)customAttribute).Description.ToString();
         }
 
         public static bool IsStringOnEnumDefaultValue<T>(this string inputString)
@@ -49,7 +41,7 @@ namespace Extensions.Package.NetCore
                 .Cast<T>()
                 .Any(enumObject => inputString
                     .Equals(enumObject.GetDefaultValue(), stringComparison));
-        
+
 
         public static bool IsStringOnEnumDescription<T>(this string inputString)
             where T : Enum

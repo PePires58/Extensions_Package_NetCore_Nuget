@@ -6,7 +6,7 @@ namespace Extensions.Package.NetCore.Validations
 {
     internal class NumericValidations<T>
     {
-        public bool In(T pInt, List<T> pList)
+        internal bool In(T pInt, List<T> pList)
         {
             if (pList == null)
                 throw new ArgumentNullException(nameof(pList));
